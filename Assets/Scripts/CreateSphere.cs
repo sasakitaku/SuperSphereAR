@@ -6,18 +6,19 @@ public class CreateSphere : MonoBehaviour {
     [SerializeField]
     private GameObject createObject;
 	[SerializeField]
-	private GameObject Pointer;
-	// [SerializeField]
-	// GetPoint getPoint; 
-	private int itemCount = 10; 
-    private float radius = 6f; 
+	Camera camera; 
+	[SerializeField]
+	GameObject Center;
+	private int itemCount = 8; 
+    private float radius = 5f; 
 	Rigidbody rigidbody;
-
 	private int i;
 	List<int> numbers = new List<int>();
 
 
     public void _CreateSpehere () {
+
+		Center.transform.position = camera.transform.position;
 
         var oneCycle = 2.0f * Mathf.PI;
 
@@ -34,7 +35,7 @@ public class CreateSphere : MonoBehaviour {
 
             var position = new Vector3(x, 0, z);
 
-			//var center = position - CenterObj.transform.position;
+			var center = position + camera.transform.position;
 
 			int index = Random.Range(0,numbers.Count);
 			int ransu = numbers[index];
@@ -42,7 +43,7 @@ public class CreateSphere : MonoBehaviour {
 			if(ransu == 1){
 				//オブジェクトを精製しない
 			}else {
-				GameObject bullet = Instantiate(createObject,position,Quaternion.identity);
+				GameObject bullet = Instantiate(createObject,center,Quaternion.identity);
 				rigidbody = bullet.GetComponent<Rigidbody>();
 				rigidbody.AddForce(position*-4);
 			}

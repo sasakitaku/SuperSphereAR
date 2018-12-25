@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UniRx;
 using System;
 
-public class GameController : MonoBehaviour {
+public class GameOver : MonoBehaviour {
 	[SerializeField]
 	GameObject gameoverParticle;
 	[SerializeField]

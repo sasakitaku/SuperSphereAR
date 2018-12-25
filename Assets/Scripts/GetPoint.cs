@@ -13,8 +13,6 @@ public class GetPoint : MonoBehaviour {
 	AudioClip pointSound;
 	private AudioSource audioSource;
 	int score = 0;
-
-
 	// Use this for initialization
 	void Start () {
 		ScoreText = ScoreText.GetComponent<Text>();
@@ -31,9 +29,7 @@ public class GetPoint : MonoBehaviour {
     {
 		if(col.gameObject.tag == "Bullet")
 		{
-			score++;
-
-			Instantiate(pointParticle,col.gameObject.transform);
+			Instantiate(pointParticle,this.transform);
 
 			audioSource.PlayOneShot(pointSound);
 
@@ -41,6 +37,8 @@ public class GetPoint : MonoBehaviour {
 			foreach(var bullet in bullets){
 				Destroy(bullet);
 			}
+
+			score++;
 
 			createSphere._CreateSpehere();
 		}
