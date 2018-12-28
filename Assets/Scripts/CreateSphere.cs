@@ -4,41 +4,55 @@ using System.Collections.Generic;
 public class CreateSphere : MonoBehaviour {
 
     [SerializeField]
-    private GameObject createObject;
+    private GameObject createobj;
 	[SerializeField]
 	Camera camera; 
-	private int itemCount = 8; 
-    private float radius = 5f; 
-	private int i;
-	List<int> numbers = new List<int>();
+	Vector3 pos;
+	int itemCount = 100;
+	int radius = 4;
+	int i;
+	float angle1;
+	float angle2;
+	//List<int> numbers = new List<int>();
     public void _CreateSpehere () {
-        var oneCycle = 2.0f * Mathf.PI;
 
+		Vector3 camera_pos = camera.transform.position;
 		for (i = 0; i < itemCount; ++i)
 		{
-			numbers.Add(i);
-		} 
+			angle1 = Random.Range(0,360);
+			angle2 = Random.Range(0,360);
+			pos = new Vector3(radius*Mathf.Sin(angle2*Mathf.Deg2Rad)*Mathf.Cos(angle1*Mathf.Deg2Rad),
+		    radius*Mathf.Cos(angle2*Mathf.Deg2Rad),radius*Mathf.Sin(angle2*Mathf.Deg2Rad)*Mathf.Sin(angle1*Mathf.Deg2Rad));
+			Instantiate(createobj,pos+camera_pos,Quaternion.identity);
+		}
 
-        for (i = 0; i < itemCount; ++i)
-        {
-			var point = (i / itemCount) * oneCycle; 
-            var x = Mathf.Cos(point) * radius;
-            var z = Mathf.Sin(point) * radius;
+        // var oneCycle = 2.0f * Mathf.PI;
 
-            var position = new Vector3(x, 0, z);
+		// for (i = 0; i < itemCount; ++i)
+		// {
+		// 	numbers.Add(i);
+		// } 
 
-			var center = position + camera.transform.position;
+        // for (i = 0; i < itemCount; ++i)
+        // {
+		// 	var point = (i / itemCount) * oneCycle; 
+        //     var x = Mathf.Cos(point) * radius;
+        //     var z = Mathf.Sin(point) * radius;
 
-			int index = Random.Range(0,numbers.Count);
-			int ransu = numbers[index];
+        //     var position = new Vector3(x, 0, z);
 
-			if(ransu == 1){
-				//オブジェクトを精製しない
-			}else {
-				GameObject bullet = Instantiate(createObject,center,Quaternion.identity);
-			}
+		// 	var center = position + camera.transform.position;
 
-			numbers.RemoveAt(index);
-        }
+		// 	int index = Random.Range(0,numbers.Count);
+		// 	int ransu = numbers[index];
+
+		// 	if(ransu == 1){
+		// 		//オブジェクトを精製しない
+		// 	}else {
+		// 		GameObject bullet = Instantiate(createObject,center,Quaternion.identity);
+		// 	}
+
+		// 	numbers.RemoveAt(index);
+        // }
     }
 }

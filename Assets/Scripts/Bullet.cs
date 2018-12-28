@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 	Rigidbody rb;
-	float speed = 0.2f;
-	float highspeed = 0.5f;
+	float speed = 0.05f;
+	float highspeed = 0.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 diff = (Camera.main.transform.position - transform.position);
-		
+
 		if(0< Input.touchCount){
 			rb.velocity = diff * highspeed;
 		}else{
